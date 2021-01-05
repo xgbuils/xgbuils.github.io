@@ -157,11 +157,12 @@ const formatToPartsTest = amount => {
       locale: 'en-UK'
     };
     const currency = 'USD';
-    const moneyParts = new Intl.NumberFormat(locale.locale, {
+    const formatter =  new Intl.NumberFormat(locale.locale, {
       style: 'currency',
       currency,
       minimumFractionDigits: 2,
-    }).formatToParts(amount);
+    });
+    const moneyParts = formatter.formatToParts(amount);
     return JSON.stringify(moneyParts);
   } catch (error) {
     return error.message;
