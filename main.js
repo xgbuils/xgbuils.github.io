@@ -131,7 +131,6 @@ const test1 = amount => {
     const moneyParts = new Intl.NumberFormat(locale.locale, {
       style: 'currency',
       currency,
-      minimumFractionDigits: 2,
     }).format(amount);
     return JSON.stringify(moneyParts);
   } catch (error) {
@@ -145,7 +144,10 @@ const simpleFormatterTest = amount => {
       locale: 'en-UK'
     };
     const currency = 'USD';
-    const formatter = SimpleFormatter(locale, currency, true);
+    const formatter = SimpleFormatter(new Intl.NumberFormat(locale.locale, {
+      style: 'currency',
+      currency,
+    }));
     const moneyParts = formatter.format(amount);
     return JSON.stringify(moneyParts);
   } catch (error) {
@@ -161,7 +163,6 @@ const browserSupportTest = ()  => {
   const formatter =  new Intl.NumberFormat(locale.locale, {
     style: 'currency',
     currency,
-    minimumFractionDigits: 2,
   });
   return browserDoesNotSupportFormatToParts(formatter).toString();
 };
@@ -175,7 +176,6 @@ const formatToPartsTest = amount => {
     const formatter =  new Intl.NumberFormat(locale.locale, {
       style: 'currency',
       currency,
-      minimumFractionDigits: 2,
     });
     const moneyParts = formatter.formatToParts(amount);
     return JSON.stringify(moneyParts);
