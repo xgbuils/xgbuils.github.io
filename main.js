@@ -192,7 +192,8 @@ const test2 = amount => {
     const currency = 'USD';
     const formatter = MoneyFormatter(locale, currency, true);
     const moneyParts = formatter.format(amount);
-    return JSON.stringify(moneyParts);
+    const lastPart = moneyParts[moneyParts.length - 1];
+    return JSON.stringify(lastPart);
   } catch (error) {
     return error.message;
   }
