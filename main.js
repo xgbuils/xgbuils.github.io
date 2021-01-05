@@ -131,6 +131,7 @@ const test1 = amount => {
     const moneyParts = new Intl.NumberFormat(locale.locale, {
       style: 'currency',
       currency,
+      minimumFractionDigits: 2,
     }).format(amount);
     return JSON.stringify(moneyParts);
   } catch (error) {
