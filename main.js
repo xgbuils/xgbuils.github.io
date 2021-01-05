@@ -151,6 +151,23 @@ const browserSupportTest = ()  => {
   })).toString();
 };
 
+const formatToPartsTest = amount => {
+  try {
+    const locale = {
+      locale: 'en-UK'
+    };
+    const currency = 'USD';
+    const moneyParts = new Intl.NumberFormat(locale.locale, {
+      style: 'currency',
+      currency,
+      minimumFractionDigits: 2,
+    }).formatToParts(amount);
+    return JSON.stringify(moneyParts);
+  } catch (error) {
+    return error.message;
+  }
+}
+
 const test2 = amount => {
   try {
     const locale = {
@@ -177,6 +194,7 @@ document.getElementById('app').appendChild(
     'div', [
       testWrapper(35.87, test1),
       testWrapper('browser support', browserSupportTest),
+      testWrapper(35.87, formatToPartsTest),
       testWrapper(35.87, test2),
     ]
   )
