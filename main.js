@@ -122,7 +122,23 @@ const MoneyFormatter = (
   );
 };
 
-const test = amount => {
+const test1 = amount => {
+  try {
+    const locale = {
+      locale: 'en-UK'
+    };
+    const currency = 'USD';
+    const moneyParts = new Intl.NumberFormat(locale.locale, {
+      style: 'currency',
+      currency,
+    }).format(amount);
+    return JSON.stringify(moneyParts);
+  } catch (error) {
+    return error.message;
+  }
+};
+
+const test2 = amount => {
   try {
     const locale = {
       locale: 'en-UK'
@@ -136,7 +152,7 @@ const test = amount => {
   }
 };
 
-const Money = (amount) => h('div', [
+const testWrapper = (amount, test) => h('div', [
   h('span', `${amount}: `),
   h('span', test(amount))
 ]);
@@ -146,7 +162,8 @@ app.innerHTML = '';
 document.getElementById('app').appendChild(
   h(
     'div', [
-      Money(35.87)
+      testWrapper(35.87, test1),
+      testWrapper(35.87, test2),
     ]
   )
 );
