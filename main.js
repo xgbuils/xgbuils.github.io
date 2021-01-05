@@ -144,11 +144,12 @@ const browserSupportTest = ()  => {
     locale: 'en-UK'
   };
   const currency = 'USD';
-  return browserDoesNotSupportFormatToParts(new Intl.NumberFormat(locale.locale, {
+  const formatter =  new Intl.NumberFormat(locale.locale, {
     style: 'currency',
     currency,
     minimumFractionDigits: 2,
-  })).toString();
+  });
+  return browserDoesNotSupportFormatToParts(formatter).toString();
 };
 
 const formatToPartsTest = amount => {
