@@ -215,6 +215,7 @@ app.innerHTML = '';
 document.getElementById('app').appendChild(
   h(
     'div', [
+      h('div', ['userAgent', navigator.userAgent]),
       testWrapper(35.87, test1),
       testWrapper(35.87, simpleFormatterTest),
       testWrapper('browser support', browserSupportTest),
