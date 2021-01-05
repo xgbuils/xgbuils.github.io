@@ -139,6 +139,20 @@ const test1 = amount => {
   }
 };
 
+const simpleFormatterTest = amount => {
+  try {
+    const locale = {
+      locale: 'en-UK'
+    };
+    const currency = 'USD';
+    const formatter = SimpleFormatter(locale, currency, true);
+    const moneyParts = formatter.format(amount);
+    return JSON.stringify(moneyParts);
+  } catch (error) {
+    return error.message;
+  }
+};
+
 const browserSupportTest = ()  => {
   const locale = {
     locale: 'en-UK'
@@ -195,6 +209,7 @@ document.getElementById('app').appendChild(
   h(
     'div', [
       testWrapper(35.87, test1),
+      testWrapper(35.87, simpleFormatterTest),
       testWrapper('browser support', browserSupportTest),
       testWrapper(35.87, formatToPartsTest),
       testWrapper(35.87, test2),
