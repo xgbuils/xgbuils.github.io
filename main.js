@@ -139,6 +139,18 @@ const test1 = amount => {
   }
 };
 
+const browserSupportTest = ()  => {
+  const locale = {
+    locale: 'en-UK'
+  };
+  const currency = 'USD';
+  return browserDoesNotSupportFormatToParts(new Intl.NumberFormat(locale.locale, {
+    style: 'currency',
+    currency,
+    minimumFractionDigits: 2,
+  })).toString();
+};
+
 const test2 = amount => {
   try {
     const locale = {
@@ -164,6 +176,7 @@ document.getElementById('app').appendChild(
   h(
     'div', [
       testWrapper(35.87, test1),
+      testWrapper('browser support', browserSupportTest),
       testWrapper(35.87, test2),
     ]
   )
