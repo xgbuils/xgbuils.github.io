@@ -10,6 +10,9 @@ const h = (tagName, children) => {
   return el;
 };
 
+const toMoneyText = moneyParts =>
+  moneyParts.reduce((result, { value }) => result + value, '');
+
 const SimpleFormatter = formatter => ({
   format(amount) {
     return [
