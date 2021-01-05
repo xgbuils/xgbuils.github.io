@@ -14,12 +14,20 @@ const app = document.getElementById('app');
 
 app.innerHTML = '';
 
+const content = amount => {
+  try {
+    return JSON.stringify(Intl.NumberFormat('en-UK', {
+      style: 'currency',
+      currency: 'USD',
+    }).formatToParts(amount));
+  } catch (error) {
+    return error.message;
+  }
+};
+
 const Money = (amount) => h('div', [
   h('span', `${amount}: `),
-  h('span', JSON.stringify(Intl.NumberFormat('en-UK', {
-    style: 'currency',
-    currency: 'USD',
-  }).formatToParts(amount)))
+  h('span', content(amount))
 ]);
 
 document.getElementById('app').appendChild(
