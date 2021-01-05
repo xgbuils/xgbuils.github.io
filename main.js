@@ -193,10 +193,10 @@ const test2 = amount => {
     const formatter = MoneyFormatter(locale, currency, true);
     const moneyParts = formatter.format(amount);
     const lastPart = moneyParts[moneyParts.length - 1];
-    return JSON.stringify(lastPart);
     const a11yContainerProps = { 'aria-label': toMoneyText(moneyParts) };
     const a11yPartProps = { 'aria-hidden': true };
     moneyParts.map(part => part.value);
+    return JSON.stringify(lastPart);
   } catch (error) {
     return error.message;
   }
